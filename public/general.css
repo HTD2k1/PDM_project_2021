@@ -1,0 +1,42 @@
+/* Navigation Bar */
+body {
+  background-color: #323232;
+}
+div > nav.main_navbar {
+  background: #1e1e1e;
+  color: white;
+  padding: 30px 60px;
+  display: flex;
+  justify-content: space-between;
+}
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+nav li {
+  list-style: none;
+}
+a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 8px;
+}
+a:hover {
+  color: rgba(117, 126, 255, 1);
+  transition: 1s;
+}
+
+button {
+    background-color: rgba(117, 126, 255, 1);
+    color: white;
+    width: 8em;
+    padding: 0.75em;
+    border-radius: 5px;
+  }
+button:hover {
+    transition: 1s;
+    background-color: rgb(132, 229, 233);
+    color: #1e1e1e;
+  }

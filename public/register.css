@@ -1,0 +1,12 @@
+label {
+  font-size: 20px;
+  color: white;
+}
+form {
+    padding: 50px;
+    border-radius: 5px;
+    background: #1e1e1e;
+}
+.form-text {
+  color: rgba(117, 126, 255, 1);
+}
