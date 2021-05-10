@@ -1,12 +1,12 @@
-const mysql = require('mysql2');
+const mysql2 = require('mysql2');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-const db = mysql.createConnection({
-    host: 'sql6.freemysqlhosting.net',
-    user: 'sql6410357',
-    password: 'hDtPUhhXI6',
-    database: 'sql6410357'
+const db = mysql2.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: 'Phna0220',
+    database: 'health_system'
 })
 
 exports.searchDoctor = (req, res) => {
