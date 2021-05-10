@@ -11,37 +11,65 @@ const db = mysql.createConnection({
 
 exports.register = (req, res) => {
     console.log(req.body);
-    const { username, password, password_confirm } = req.body;
-    db.query("SELECT username FROM user WHERE username = ?", [username], async (error, results) => {
-        var resultArray = Object.values(JSON.parse(JSON.stringify(results)))
-        if (error) {
-            console.log(error);
-        }
-
-        if (resultArray.length > 0) {
-            return res.render("register", {
-                errorMessage: "That username is already registered!"
-            })
-        } else if (password != password_confirm) {
-            return res.render("register", {
-                errorMessage: "Password do not match!"
-            })
-        }
-
-        let hashedPassword = await bcrypt.hash(password, 5);
-        console.log(hashedPassword);
-
-        db.query('INSERT INTO user SET ?', { username: username, password: password }, (error, results) => {
-            if (error) {
+    const { fullname, dob, email, phone, username, password, password_confirm } = req.body;
+    // Check for existing user in USER TABLE
+    db.query("SELECT userID FROM user WHERE fullname = ? AND dob = ? AND email = ? AND phone = ?",
+        [fullname, dob, email, phone], (error, final_results) => {
+            var new_user_array = Object.values(JSON.parse(JSON.stringify(final_results)));
+            console.log(new_user_array)
+            if (new_user_array.length != 0) {
                 console.log(error);
+                return res.render("register", {
+                    errorMessage: "The user has already registered before!"
+                });
             } else {
-                console.log(results);
+                // Check for existing account in ACCOUNT table
+                db.query("SELECT username FROM account WHERE username = ?", [username], async (error, results) => {
+                    var resultArray = Object.values(JSON.parse(JSON.stringify(results)))
+                    if (error) {
+                        console.log(error);
+                    }
+                    if (resultArray.length > 0) {
+                        return res.render("register", {
+                            errorMessage: "That username is already registered!"
+                        })
+                    } else if (password != password_confirm) {
+                        return res.render("register", {
+                            errorMessage: "Password do not match!"
+                        })
+                    }
+                })
+                // If no existing user, create new_user in USER table
+                db.query('INSERT INTO user SET ?',
+                    { fullname: fullname, dob: dob, email: email, phone: phone }, (error) => {
+                        if (error)
+                            console.log(error);
+                        else
+                            console.log("User has been created");
+                    });
+                // Retrieve new_user from USER table
+                db.query("SELECT userID FROM user WHERE fullname = ? AND dob = ? AND email = ? AND phone = ?",
+                    [fullname, dob, email, phone], (error, results) => {
+                        var new_user = Object.values(JSON.parse(JSON.stringify(results)))
+                        if (error)
+                            console.log(error)
+                        else {
+                            db.query('INSERT INTO account SET ?', { userID: new_user[0], username: username, password: password },
+                                (error, results) => {
+                                    if (error)
+                                        console.log(error);
+
+                                });
+                            console.log("Result from insertion \n", results);
+                        }
+                    });
+                console.log("Final results from request \n", final_results);
+
                 return res.render('register', {
                     confirmMessage: "User is now registered!"
                 });
             }
         });
-    })
 }
 
 exports.login = async (req, res) => {

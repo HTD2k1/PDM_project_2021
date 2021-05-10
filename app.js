@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Define Routes: whatever has the route such as '/auth/register' in register.hbs, go to the defined router, here is 'auth.js'
-app.use('/', require('./routes/pages'));
+app.use('/', require('./routes/main'));
 app.use('/auth', require('./routes/auth'));
 app.use('/user', require('./routes/user'));
 

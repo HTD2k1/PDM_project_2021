@@ -19,7 +19,7 @@
             <ul>
                 <li><a href="/user">Homepage</a></li>
                 <li><a href="/user/specialist">Specialist</a></li>
-                <li><a href="/user/feedback">Feedback</a></li>
+                <li><a href="/user/logout">Logout</a></li>
             </ul>
         </nav>
     </div>
@@ -27,11 +27,19 @@
 
     <div class="container mt-4">
         <div class="jumbotron">
-            <h1 class="display-4">How are you today?</h1>
-            <p class="lead">Thank you very much for reaching us. Please share with us how you are feeling right now.</p>
+            <h1 class="display-4">Welcome to Smart Health Predictor</h1>
+            <p class="lead">Thank you for reaching us. Tell us about your symptoms, okay?</p>
             <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <button type="submit" class="search-button">Search</button>
+            <form action="/login" method="POST">
+                <div class="mb-3">
+                    <label for="symptoms" class="form-label">Symptoms</label>
+                    <input type="text" class="form-control" id="symptoms" name="symptoms">
+                    <div id="symptomHelp" class="form-text">Please describe how you are feeling using the search field
+                        above</div>
+                </div>
+                <button type="submit" class="search-button">Search</button>
+            </form>
+
         </div>
     </div>
 </body>
