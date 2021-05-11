@@ -1,14 +1,11 @@
 const express = require('express');
-const mysql2 = require('mysql2');
 const app = express();
 const path = require('path');
 const cookieParser = require('cookie-parser');
-
+const db = require('./models/model.database');
 // Set views and public directory for rendering
 const publicDirectory = path.join(__dirname, './public');
 const userViewDirectory = path.join(__dirname, './views');
-console.log(publicDirectory);
-console.log(userViewDirectory);
 app.use(express.static(publicDirectory));
 app.use(express.static(userViewDirectory));
 
@@ -35,14 +32,6 @@ app.listen(3000, () => {
 const dotenv = require('dotenv');
 dotenv.config({
     path: "./.env"
-})
-
-// Database connection
-const db = mysql2.createConnection({
-    host: '127.0.0.1',
-    user: 'root',
-    password: 'Phna0220',
-    database: 'health_system'
 })
 
 db.connect((err, res) => {
