@@ -1,0 +1,90 @@
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Health Predictor</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+      crossorigin="anonymous"
+    />
+    <link href="/general.css" rel="stylesheet" />
+    <link href="/index.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div>
+      <nav class="main_navbar">
+        <h4>
+          <a href="/user" class="page-title">HealthPredictor</a>
+        </h4>
+        <ul>
+          <li><a href="/user">Homepage</a></li>
+          <li><a href="/user/search">Search</a></li>
+          <li><a href="/user/logout">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="container mt-4">
+      <div class="jumbotron">
+        <div class="row align-items-start">
+          {{#if errorMessage}}
+            <h4 class="alert alert-danger mt-4">{{errorMessage}}</h4>
+          {{/if}}
+          {{#if disease}}
+            <h4 class="alert alert-success mt-4">Successful search for diseases
+              with your input</h4>
+          {{/if}}
+
+          <form action="/user/search-symptom" method="POST">
+            <div class="mb-3">
+              <h1 class="display-4">Search for Symptoms</h1>
+              <p class="label">Give us a comma-separated list of symptoms you
+                are experiencing
+              </p>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="(e.g.`depression, fatigue, cough, etc.`)"
+                name="symptoms"
+                id="symptoms"
+              />
+            </div>
+            <button type="submit" class="search-button">Search</button>
+          </form>
+
+        </div>
+
+        <hr class="my-4" />
+        <div class="symptoms-search-results">
+          <h1 class="display-4">Current Results</h1>
+          {{#if disease}}
+            {{#each disease}}
+              <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+                <div class="card-header">
+                  <h6>Disease ID: {{diseaseID}}</h6>
+                </div>
+                <div class="card-body">
+                  <h2 class="card-title">{{diseaseName}}</h2>
+                  <p class="card-text">{{diseaseDesc}}</p>
+                </div>
+              </div>
+
+            {{/each}}
+          {{else}}
+            <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+              <div class="card-body">
+                  <h2 class="card-title">No Results</h2>
+              </div>
+            </div>
+          {{/if}}
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+
+</html>

@@ -1,35 +1,32 @@
 const db = require('../models/model.database.js');
-const authController = require('./auth.controller');
-const bcrypt = require('bcrypt');
-const { reset } = require('nodemon');
-
-exports.getUserInfo = (req, res) => {
-    const username = cookie.username;
-    const password = cookie.password;
-    const userInfo = db.query(`SELECT user.userID, user.fullname, user.dob, user.email, user.phone
-                FROM users user, account acc
-                WHERE user.userID = acc.userID AND acc.username = ? AND acc.password = ?`,
-        [username, password], (error, result) => {
-            if (error) {
-                console.log("Failed to retrieve user info. Returning to main page!");
-                res.status(400).redirect("/");
-            } else {
-                const user = result[0];
-                console.log(user);
-                return res.send({
-                    userID: user.userID,
-                    fullname: user.fullname,
-                    dob: user.dob,
-                    email: user.email,
-                    phone: user.phone
-                });
-            }
-        });
-    console.log(userInfo);
-}
 
 exports.searchSymptom = (req, res) => {
+    const inputSymptoms = req.body.symptoms.split(",").map((value) => {
+        return value.trim();
+    });
+    var firstSymptom = inputSymptoms.shift();
+    var condition = `("${firstSymptom}"`;
+    for (symptom of inputSymptoms) {
+        condition += `, "${symptom}"`
+    }
+    condition += `)`;
+    console.log(condition);
+    db.query(`SELECT DISTINCT d.diseaseID, d.diseaseName, d.diseaseDesc, s.symptomName
+            FROM disease d, symptom_disease sd, symptoms s
+            WHERE d.diseaseID = sd.diseaseID AND sd.symptomID = s.symptomID 
+            AND s.symptomName IN ${condition}`, (error, results) => {
 
+        if (error) {
+            return res.render("./user/userSearch", {
+                errorMessage: "Error when looking for diseases with your input. Try again!"
+            })
+        } else {
+            console.log(results);
+            return res.render("./user/userSearch", {
+                disease: results
+            })
+        }
+    })
 }
 
 exports.searchDoctor = (req, res) => {

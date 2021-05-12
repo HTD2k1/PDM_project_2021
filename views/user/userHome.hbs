@@ -18,29 +18,58 @@
             </h4>
             <ul>
                 <li><a href="/user">Homepage</button></a></li>
-                <li><a href="/user/profile">Profile</a></li>
+                <li><a href="/user/search">Search</a></li>
                 <li><a href="/user/logout">Logout</a></li>
             </ul>
         </nav>
     </div>
 
-
     <div class="container mt-4">
-        <div class="jumbotron">
-            <h1 class="display-4">Welcome back user</h1>
-            <p class="lead">Thank you for reaching us. Tell us about your symptoms, okay?</p>
-            <hr class="my-4">
-            <form action="/login" method="POST">
-                <div class="mb-3">
-                    <label for="symptoms" class="form-label">Symptoms</label>
-                    <input type="text" class="form-control" id="symptoms" name="symptoms">
-                    <div id="symptomHelp" class="form-text">Please describe how you are feeling using the search field
-                        above</div>
-                </div>
-                <button type="submit" class="search-button">Search</button>
-            </form>
+      <div class="jumbotron">
+        <h1 class="display-4">Welcome back {{username}} - UserID: {{userID}}</h1>
+        <p class="profile-label">This is the information you have used to register with us!</p>
 
+        <hr class="my-4" />
+
+        <div class="row align-items-start">
+          <div class="col">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem; height: 200px">
+              <div class="card-header">Fullname:</div>
+              <div class="card-body">
+                <h5 class="card-title">{{fullname}}</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem; height: 200px">
+              <div class="card-header">Date of Birth:</div>
+              <div class="card-body">
+                <h5 class="card-title">{{dob}}</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem; height: 200px">
+              <div class="card-header">Email:</div>
+              <div class="card-body">
+                <h5 class="card-title">{{email}}</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem; height: 200px">
+              <div class="card-header">Phone Number:</div>
+              <div class="card-body">
+                <h5 class="card-title">{{phone}}</h5>
+              </div>
+            </div>
+          </div>
         </div>
+
+      </div>
     </div>
 </body>
 
