@@ -69,6 +69,35 @@ INSERT INTO `disease` VALUES (1,'Drug Reaction','An adverse drug reaction (ADR) 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `disease_doctor`
+--
+
+DROP TABLE IF EXISTS `disease_doctor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `disease_doctor` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `doctorID` int NOT NULL,
+  `diseaseID` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKDD_doctorID_idx` (`doctorID`),
+  KEY `FKDD_diseaseID_idx` (`diseaseID`),
+  CONSTRAINT `FKDD_diseaseID` FOREIGN KEY (`diseaseID`) REFERENCES `disease` (`diseaseID`),
+  CONSTRAINT `FKDD_doctorID` FOREIGN KEY (`doctorID`) REFERENCES `doctors` (`doctorID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `disease_doctor`
+--
+
+LOCK TABLES `disease_doctor` WRITE;
+/*!40000 ALTER TABLE `disease_doctor` DISABLE KEYS */;
+INSERT INTO `disease_doctor` VALUES (1,1,1),(2,1,2),(3,1,3),(4,2,4),(5,2,5),(6,2,6),(7,3,7),(8,3,8),(9,3,9),(10,4,10),(11,4,11),(12,4,12),(13,4,13),(14,4,14),(15,4,15),(16,4,16),(17,5,16),(18,5,17),(19,5,1),(20,5,3),(21,6,1),(22,6,3),(23,6,4),(24,6,7),(25,6,9),(26,6,10),(27,6,11),(28,7,41),(29,7,40),(30,7,39),(31,7,38),(32,7,36),(33,7,37),(34,7,36),(35,7,35),(36,7,34),(37,7,33),(38,5,32),(39,5,31),(40,5,30),(41,4,29),(42,4,28),(43,4,27),(44,4,26),(45,4,25),(46,4,24),(47,3,23),(48,3,22),(49,3,21),(50,3,29),(51,3,20);
+/*!40000 ALTER TABLE `disease_doctor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `disease_precaution`
 --
 
@@ -95,6 +124,33 @@ LOCK TABLES `disease_precaution` WRITE;
 /*!40000 ALTER TABLE `disease_precaution` DISABLE KEYS */;
 INSERT INTO `disease_precaution` VALUES (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,2,2),(6,2,5),(7,2,6),(8,2,7),(9,3,8),(10,3,9),(11,3,10),(12,4,11),(13,4,12),(14,4,13),(15,4,14),(16,5,15),(17,5,16),(18,5,17),(19,5,18),(23,6,12),(20,6,19),(21,6,20),(22,6,21),(27,7,13),(26,7,17),(24,7,22),(25,7,23),(28,8,2),(30,8,19),(29,8,24),(31,8,25),(33,9,2),(34,9,4),(35,9,18),(32,9,26),(36,10,27),(37,10,28),(38,10,29),(39,10,30),(43,11,17),(40,11,31),(41,11,32),(42,11,33),(45,12,19),(44,12,34),(46,12,35),(47,12,36),(51,13,4),(49,13,12),(50,13,18),(48,13,37),(55,14,17),(52,14,38),(53,14,39),(54,14,40),(58,15,11),(59,15,14),(57,15,18),(56,15,41),(60,16,19),(61,16,42),(62,16,43),(63,16,44),(64,17,19),(65,17,45),(66,17,46),(67,17,47),(68,18,48),(69,18,49),(70,18,50),(71,18,51),(72,19,52),(73,19,53),(74,19,54),(75,19,55),(77,20,12),(79,20,17),(76,20,56),(78,20,57),(80,21,13),(81,21,58),(82,21,59),(83,21,60),(84,22,35),(85,22,61),(86,22,62),(87,22,63),(88,23,64),(89,23,65),(90,23,66),(91,23,67),(95,24,4),(94,24,17),(92,24,68),(93,24,69),(98,25,12),(97,25,13),(99,25,17),(96,25,58),(102,26,17),(103,26,25),(100,26,70),(101,26,71),(104,27,2),(106,27,13),(107,27,25),(105,27,72),(108,28,34),(109,28,73),(110,28,74),(111,28,75),(112,29,2),(114,29,13),(115,29,25),(113,29,72),(117,30,11),(119,30,17),(116,30,41),(118,30,76),(120,31,77),(121,31,78),(122,31,79),(123,31,80),(127,32,4),(125,32,17),(126,32,25),(124,32,81),(131,33,25),(128,33,35),(129,33,82),(130,33,83),(134,34,17),(135,34,25),(132,34,81),(133,34,84),(137,35,19),(136,35,85),(138,35,86),(139,35,87),(143,36,4),(142,36,13),(140,36,17),(141,36,25),(144,37,88),(145,37,89),(146,37,90),(150,38,4),(147,38,17),(148,38,25),(149,38,84),(151,39,12),(154,39,58),(152,39,91),(153,39,92),(157,40,84),(155,40,93),(156,40,94),(158,40,95),(160,41,17),(161,41,25),(162,41,84),(159,41,96);
 /*!40000 ALTER TABLE `disease_precaution` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `doctors`
+--
+
+DROP TABLE IF EXISTS `doctors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `doctors` (
+  `doctorID` int NOT NULL AUTO_INCREMENT,
+  `fullname` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `phone` varchar(45) NOT NULL,
+  PRIMARY KEY (`doctorID`),
+  UNIQUE KEY `doctorID_UNIQUE` (`doctorID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `doctors`
+--
+
+LOCK TABLES `doctors` WRITE;
+/*!40000 ALTER TABLE `doctors` DISABLE KEYS */;
+INSERT INTO `doctors` VALUES (1,'Khoa Ha','khoa@gmai.com','0123456789'),(2,'Dat Tien','dattien@gmail.com','09096653327'),(3,'Phong Thanh','phong@gmail.com','0857772323'),(4,'Quang Minh','quang@gmail.com','01857776453'),(5,'Anh Pham','anhpham@gmail.com','0815903939'),(6,'Khoi Pham','khoi@gmail.com','09098574221'),(7,'Duc Thinh','thinhtruong@yahoo.com','0857294832');
+/*!40000 ALTER TABLE `doctors` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -250,4 +306,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-12 18:10:13
+-- Dump completed on 2021-05-14  1:17:53

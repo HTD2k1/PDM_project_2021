@@ -60,18 +60,26 @@
           <h1 class="display-4">Current Results</h1>
           {{#if disease}}
             {{#each disease}}
-              <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+              <div class="card text-white bg-dark mb-3" style="max-width: 100%; margin: 5%">
                 <div class="card-header">
                   <h3>Disease ID - {{diseaseID}}</h3>
                 </div>
                 
                 <div class="card-body">
                   <h2 class="card-title">{{diseaseName}}</h2>
+                  
                   <p class="card-text">{{diseaseDesc}}</p>
+                  <h3>Recommended precautions</h3>
+                  <p>{{precautions}}</p>
                 </div>
 
                 <div class="card-footer">
-                  <h3>Recommended precautions:</h3>
+                  <h3>Specialist Contacts</h3>
+                  {{#each doctors}}
+                    <h5>Dr. {{fullname}} - ID: {{doctorID}}</h5>
+                    <p>Email: {{email}}</p>
+                    <p> Number: {{phone}}</p>
+                  {{/each}}
                 </div>
               </div>
 
