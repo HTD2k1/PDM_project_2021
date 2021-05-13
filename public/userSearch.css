@@ -1,0 +1,10 @@
+
+.card-header > h3 {
+    font-size: 16pt;
+}
+.card-header {
+    background-color:#5669ff;
+}
+.card-title {
+    color: #5669ff;
+}
