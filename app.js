@@ -37,7 +37,7 @@ dotenv.config({
 db.connect((err, res) => {
     if (err) {
         console.log("|| Database failed to connect...")
-        console.log(error);
+        console.log(err);
     } else {
         console.log("|| Database successfully connected!!!")
     }
