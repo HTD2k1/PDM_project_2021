@@ -104,11 +104,8 @@ exports.searchSymptom = (req, res) => {
                 var doctorResults = await queryDoctors(disease);
                 var doctors = extractDoctors(doctorResults);
                 // Update a disease to contain all info
-                var newDiseaseObject = Object.assign(disease, precautions);
-                newDiseaseObject = Object.assign(newDiseaseObject, doctors);
-                console.log(newDiseaseObject);
-                diseaseArray.shift();
-                diseaseArray.push(newDiseaseObject);
+                Object.assign(disease, precautions);
+                Object.assign(disease, doctors);
             };
             // Return
             return res.render("./user/userSearch", {
